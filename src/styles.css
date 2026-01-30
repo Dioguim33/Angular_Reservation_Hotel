@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    background-color: #f4f6f9; /* Cinza bem claro */
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.card-custom {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    background: white;
+    padding: 2rem;
+}
+
+.btn-custom-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.btn-custom-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+    color: white;
+}
+
+/* Regras apenas para telas menores que 768px (Celulares) */
+@media (max-width: 768px) {
+    
+    /* Diminui o padding geral para aproveitar espaço */
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /* Reduz o tamanho da fonte da tabela no mobile */
+    .table {
+        font-size: 0.85rem;
+    }
+
+    /* Opcional: Esconde colunas menos urgentes no mobile */
+    /* Exemplo: Esconde a coluna 2 (Email) e 3 (Quarto) em telas muito pequenas */
+    .table th:nth-child(2), .table td:nth-child(2),
+    .table th:nth-child(3), .table td:nth-child(3) {
+        display: none; 
+    }
+    
+    /* Ajusta os botões de ação para ficarem empilhados se precisar */
+    .btn-sm {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+    }
+}
