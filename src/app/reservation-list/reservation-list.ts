@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ReservationService } from '../reservation/reservation.service';
 import { Reservation } from '../models/reservation';
 
@@ -13,13 +13,21 @@ export class ReservationList implements OnInit {
   
   reservations: Reservation[] = [];
   
-  constructor(private reservationService: ReservationService){};
+  constructor(
+    private reservationService: ReservationService,
+    private cd: ChangeDetectorRef
+  ){};
 
   ngOnInit(): void {
-    this.reservationService.getReservations().subscribe( (reservations) => this.reservations = reservations)
-}
+    this.reservationService.getReservations().subscribe((reservations) =>{
+      this.reservations = reservations
+      this.cd.detectChanges()
+    })
+  }
   
   deleteReservation(id: string){
-    this.reservationService.deleteReservation(id);
+    this.reservationService.deleteReservation(id).subscribe(() => {
+      console.log("Delete request got processed.")
+    });
   }
 }

@@ -31,26 +31,29 @@ export class ReservationForm implements OnInit{
     })
     
     let id  = this.activatedRouter.snapshot.paramMap.get('id')
+    
     if(id){
-      let reservation = this.reservationService.getReservation(id)
-      
-      if(reservation){
-        this.reservationForm.patchValue(reservation)
-      }
+      this.reservationService.getReservation(id).subscribe(reservation => {
+        if(reservation)
+          this.reservationForm.patchValue(reservation)
+      })
     }
   }
   
   onSubmit(){
-
     if(this.reservationForm.valid){
       let reservation: Reservation = this.reservationForm.value
       let id  = this.activatedRouter.snapshot.paramMap.get('id')
 
       if(id){
         reservation.id = id;
-        this.reservationService.updatedReservation(id, reservation)
+        this.reservationService.updatedReservation(id, reservation).subscribe(() =>{
+          console.log("Updated request processed")
+        })
       } else {
-        this.reservationService.addReservation(reservation);
+        this.reservationService.addReservation(reservation).subscribe(() =>{
+          console.log("Create request processed")
+        });
       }
 
       this.router.navigate(['/list'])
